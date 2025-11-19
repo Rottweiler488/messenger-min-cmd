@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'org.rottweiler488'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("jakarta.websocket:jakarta.websocket-api:2.1.0")
+    implementation("jakarta.servlet:jakarta.servlet-api:6.0.0")
+    implementation("org.glassfish.tyrus:tyrus-server:2.1.0")
+    implementation("org.glassfish.tyrus:tyrus-client:2.1.0")
+    implementation("org.glassfish.tyrus:tyrus-container-grizzly-server:2.1.0")
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+application {
+    mainClass = 'org.rottweiler488.Main'
+}
+
+shadowJar {
+    archiveBaseName.set('messenger')
+    archiveVersion.set('1.1')
+}
+
+test {
+    useJUnitPlatform()
+}
