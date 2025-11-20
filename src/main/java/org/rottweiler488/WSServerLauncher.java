@@ -4,7 +4,7 @@ import org.glassfish.tyrus.server.Server;
 
 import java.util.Scanner;
 
-public class WSLocalServer {
+public class WSServerLauncher {
     public static final String ip = "0.0.0.0";
     public static final int port = 4052;
 

@@ -16,8 +16,13 @@ public class WSClient {
     }
 
     @OnMessage
-    public void onMessage(String message) {
+    public void onMessage(String message, Session session) {
         System.out.println(message);
+    }
+
+    @OnClose
+    public void onClose(Session session, CloseReason reason) {
+        System.out.printf("Disconnected by reason: %s", reason.getReasonPhrase());
     }
 
     public void send(String message) {

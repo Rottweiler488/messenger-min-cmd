@@ -13,6 +13,10 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public class ChatEndpoint {
     private static final Set<Session> sessions = new CopyOnWriteArraySet<>();
 
+    private LocalTime time = LocalTime.now();
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+    private final String formattedTime = time.format(formatter);
+
     @OnOpen
     public void onOpen(Session session) {
         session.getUserProperties().put("username", "Unknown");
@@ -24,12 +28,13 @@ public class ChatEndpoint {
     public void onMessage(String message, Session session) {
         if ("Unknown".equals(session.getUserProperties().get("username"))) {
             session.getUserProperties().put("username", message);
+
+            String text = String.format("%s has connected.", message);
+            sendSessions(text, session);
             return;
         }
 
-        LocalTime time = LocalTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        String formattedTime = time.format(formatter);
+        time = LocalTime.now();
 
         String username = (String) session.getUserProperties().get("username");
         if (Objects.isNull(username) || username.isEmpty()) {
@@ -40,18 +45,25 @@ public class ChatEndpoint {
 
         System.out.println(text);
 
-        for (Session s : sessions) {
-            if (!s.equals(session) && s.isOpen()) {
-                s.getAsyncRemote().sendText(text);
-            }
-        }
+        sendSessions(text, session);
     }
 
-    //TODO: Добавить уведомление всем подключённым.
     @OnClose
     public void onClose(Session session) {
         String username = (String) session.getUserProperties().get("username");
+        String text = String.format("%s disconnected.", username);
+
+        sendSessions(text, session);
         sessions.remove(session);
-        System.out.printf("%s disconnected", username);
+
+        System.out.printf("%s: %s disconnected.\n", session.getId(), username);
+    }
+
+    private void sendSessions(String message, Session session) {
+        for (Session s : sessions) {
+            if (!s.equals(session) && s.isOpen()) {
+                s.getAsyncRemote().sendText(message);
+            }
+        }
     }
 }
