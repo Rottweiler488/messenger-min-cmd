@@ -1,4 +1,4 @@
-package com.rottweiler488;
+package org.rottweiler488;
 
 import java.util.Map;
 import java.util.Scanner;

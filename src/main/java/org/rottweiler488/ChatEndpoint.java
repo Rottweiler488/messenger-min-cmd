@@ -1,4 +1,4 @@
-package com.rottweiler488;
+package org.rottweiler488;
 
 import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
@@ -21,9 +21,9 @@ public class ChatEndpoint {
     }
 
     @OnMessage
-    public void onMessage(String message, Session senderSession) {
-        if ("Unknown".equals(senderSession.getUserProperties().get("username"))) {
-            senderSession.getUserProperties().put("username", message);
+    public void onMessage(String message, Session session) {
+        if ("Unknown".equals(session.getUserProperties().get("username"))) {
+            session.getUserProperties().put("username", message);
             return;
         }
 
@@ -31,22 +31,23 @@ public class ChatEndpoint {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         String formattedTime = time.format(formatter);
 
-        String username = (String) senderSession.getUserProperties().get("username");
+        String username = (String) session.getUserProperties().get("username");
         if (Objects.isNull(username) || username.isEmpty()) {
-            username = String.format("Guest-%s", senderSession.getId());
+            username = String.format("Guest-%s", session.getId());
         }
 
         String text = String.format("(%s) %s: %s", formattedTime, username, message);//"(" + formattedTime + ") " + senderSession.getId() + ": " + message;
 
         System.out.println(text);
 
-        for (Session session : sessions) {
-            if (!session.equals(senderSession) && session.isOpen()) {
-                session.getAsyncRemote().sendText(text);
+        for (Session s : sessions) {
+            if (!s.equals(session) && s.isOpen()) {
+                s.getAsyncRemote().sendText(text);
             }
         }
     }
 
+    //TODO: Добавить уведомление всем подключённым.
     @OnClose
     public void onClose(Session session) {
         String username = (String) session.getUserProperties().get("username");

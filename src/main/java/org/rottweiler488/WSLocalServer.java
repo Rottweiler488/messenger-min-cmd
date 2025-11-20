@@ -1,11 +1,11 @@
-package com.rottweiler488;
+package org.rottweiler488;
 
 import org.glassfish.tyrus.server.Server;
 
 import java.util.Scanner;
 
 public class WSLocalServer {
-    public static final String ip = "91.197.98.236"; //0.0.0.0
+    public static final String ip = "0.0.0.0";
     public static final int port = 4052;
 
     public static void main(String[] args) {

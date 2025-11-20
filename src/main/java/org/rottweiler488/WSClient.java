@@ -1,4 +1,4 @@
-package com.rottweiler488;
+package org.rottweiler488;
 
 import jakarta.websocket.*;
 
