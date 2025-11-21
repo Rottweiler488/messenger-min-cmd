@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class WSServerLauncher {
     public static final String ip = "0.0.0.0";
-    public static final int port = 4052;
+    public static final int port = 4052; //TODO: Запрашивать
 
     public static void main(String[] args) {
         Server server = new Server(ip, port, "/ws", null, ChatEndpoint.class);

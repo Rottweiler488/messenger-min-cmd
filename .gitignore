@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 .gradle
 build/
+chats/
 !gradle/wrapper/gradle-wrapper.jar
 !src/main/**/build/
 !src/test/**/build/
