@@ -34,9 +34,13 @@ public class WSClientLauncher {
         session = null; //Возможно удалить.
         client.send(username);
 
+        String command;
+
         while (true) {
             String message = scanner.nextLine();
-            client.send(message);
+            if(!message.startsWith("/")){
+                client.send(message);
+            }
         }
     }
 }
