@@ -10,8 +10,8 @@ public class WSServerLauncher {
 
     public static void main(String[] args) {
         for (String arg : args) {
-            String key;
-            String value;
+            String key = "";
+            String value = "";
             if(arg.contains("=")) {
                 key = arg.substring(0, arg.indexOf("="));
                 value = arg.substring(arg.indexOf("=")+1);

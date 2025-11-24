@@ -3,10 +3,13 @@ package org.rottweiler488;
 import jakarta.websocket.ContainerProvider;
 import jakarta.websocket.WebSocketContainer;
 import jakarta.websocket.Session;
+import org.rottweiler488.service.commandHandler.CommandHandler;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class WSClientLauncher {
     public static void main(String[] args) {
@@ -15,7 +18,7 @@ public class WSClientLauncher {
         System.out.print("Enter your username: ");
         String username = scanner.nextLine();
 
-        String address = "";
+        /*String address = "";
         Session session = null;
         WSClient client = new WSClient();
         while (Objects.isNull(session)) {
@@ -29,15 +32,28 @@ public class WSClientLauncher {
             catch (Exception e) {
                 System.out.println("Failed to connect to the server at the specified address.");
             }
-        }
+        }*/
 
-        session = null; //Возможно удалить.
         client.send(username);
+
+        CommandHandler commandHandler = new CommandHandler();
+        WSClient client = null;
 
         while (true) {
             String message = scanner.nextLine();
-            if(!message.startsWith("/")){
-                client.send(message);
+
+            if(!message.startsWith("/")) {
+                try {
+                    client.send(message);
+                }
+                catch (Exception e) {
+                    System.out.println("No connection.");
+                }
+            }
+            else {
+                String argsMessage = message.substring(1);
+                List<String> input = List.of(argsMessage.split("\\s+"));
+                commandHandler.run(input);
             }
         }
     }
