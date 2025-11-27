@@ -1,8 +1,8 @@
-package org.rottweiler488.service.chat;
+package org.rottweiler488.min.service.chat;
 
 import jakarta.websocket.ContainerProvider;
 import jakarta.websocket.WebSocketContainer;
-import org.rottweiler488.WSClient;
+import org.rottweiler488.min.WSClient;
 
 import java.net.URI;
 

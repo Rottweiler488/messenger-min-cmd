@@ -1,6 +1,6 @@
 /// Класс ПРИМЕР показывает как создавать свои под-команды/команды.
 
-package org.rottweiler488.service.commandHandler.commands;
+package org.rottweiler488.min.service.commandHandler.commands;
 
 import java.util.List;
 //import java.util.Optional;

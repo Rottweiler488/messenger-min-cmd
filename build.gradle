@@ -23,7 +23,7 @@ dependencies {
 }
 
 application {
-    mainClass = 'org.rottweiler488.WSClientLauncher'
+    mainClass = 'org.rottweiler488.WSClientApplication'
 }
 
 shadowJar {

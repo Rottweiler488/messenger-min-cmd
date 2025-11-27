@@ -1,4 +1,4 @@
-package org.rottweiler488.model;
+package org.rottweiler488.min.model;
 
 public class UserData {
     private String username = "";

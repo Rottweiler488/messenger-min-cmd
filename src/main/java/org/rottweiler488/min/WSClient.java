@@ -1,8 +1,6 @@
-package org.rottweiler488;
+package org.rottweiler488.min;
 
 import jakarta.websocket.*;
-
-import java.util.Objects;
 
 @ClientEndpoint
 public class WSClient {
@@ -22,7 +20,7 @@ public class WSClient {
 
     @OnClose
     public void onClose(Session session, CloseReason reason) {
-        System.out.printf("Disconnected by reason: %s\n", reason.getReasonPhrase());
+        System.out.println("Disconnected");// by reason: %s\n", reason.getReasonPhrase());
     }
 
     public void send(String message) {

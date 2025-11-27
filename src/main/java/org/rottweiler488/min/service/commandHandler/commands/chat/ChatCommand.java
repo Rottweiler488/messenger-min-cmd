@@ -1,6 +1,6 @@
-package org.rottweiler488.service.commandHandler.commands.chat;
+package org.rottweiler488.min.service.commandHandler.commands.chat;
 
-import org.rottweiler488.service.commandHandler.commands.Command;
+import org.rottweiler488.min.service.commandHandler.commands.Command;
 
 import java.util.List;
 

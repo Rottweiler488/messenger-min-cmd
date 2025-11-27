@@ -1,8 +1,9 @@
-package org.rottweiler488;
+package org.rottweiler488.min;
 
 import jakarta.websocket.*;
+import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
-import org.rottweiler488.model.MessageData;
+import org.rottweiler488.min.model.MessageData;
 
 import java.io.IOException;
 import java.time.LocalTime;
@@ -11,8 +12,10 @@ import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-@ServerEndpoint("/chat")
-public class ChatEndpoint {
+@ServerEndpoint("/chat")///{chatName}")
+public class WSServerEndpoint {
+    //private static final Map<String, ConcurrentHashMap<String, Session>> chats = new ConcurrentHashMap<>();
+
     public static final Set<Session> sessions = new CopyOnWriteArraySet<>();
     public static final List<MessageData> messagesData = new CopyOnWriteArrayList<>();
 
@@ -32,7 +35,7 @@ public class ChatEndpoint {
     }
 
     @OnOpen
-    public void onOpen(Session session) {
+    public void onOpen(Session session) {//, @PathParam("chatName") String chatName) {
         session.getUserProperties().put("username", "Unknown");
         sessions.add(session);
         System.out.println("Client connection: " + session.getId());

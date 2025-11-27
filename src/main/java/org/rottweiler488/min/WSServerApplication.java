@@ -1,10 +1,10 @@
-package org.rottweiler488;
+package org.rottweiler488.min;
 
 import org.glassfish.tyrus.server.Server;
 
 import java.util.Scanner;
 
-public class WSServerLauncher {
+public class WSServerApplication {
     public static String ip = "0.0.0.0";
     public static int port = 4052;
 
@@ -30,7 +30,7 @@ public class WSServerLauncher {
             }
         }
 
-        Server server = new Server(ip, port, "/ws", null, ChatEndpoint.class);
+        Server server = new Server(ip, port, "/ws", null, WSServerEndpoint.class);
 
         try {
             server.start();

@@ -1,9 +1,9 @@
-package org.rottweiler488;
+package org.rottweiler488.min;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.rottweiler488.model.MessageData;
+import org.rottweiler488.min.model.MessageData;
 
 import java.io.File;
 import java.io.IOException;

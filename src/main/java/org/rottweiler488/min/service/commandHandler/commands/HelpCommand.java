@@ -1,4 +1,4 @@
-package org.rottweiler488.service.commandHandler.commands;
+package org.rottweiler488.min.service.commandHandler.commands;
 
 import java.util.List;
 
