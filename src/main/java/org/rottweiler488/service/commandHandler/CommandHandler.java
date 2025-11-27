@@ -1,23 +1,31 @@
 package org.rottweiler488.service.commandHandler;
 
 import org.rottweiler488.service.commandHandler.commands.*;
+import org.rottweiler488.service.commandHandler.commands.chat.ChatCommand;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class CommandHandler {
     private Map<String, Command> commands = new HashMap<String, Command>();//CommandsResgister.getCommands();
 
     public CommandHandler() {
-        MinCommand minCommand = new MinCommand();
-        commands.put(minCommand.getName(), minCommand);
+        addCommand(new HelpCommand());
+        addCommand(new ChatCommand());
+    }
+
+    private void addCommand(Command command) {
+        String commandName = command.getName();
+        commands.put(commandName, command);
     }
 
     public void run(List<String> input) {
         try {
-            handleCommand(input);
+            List<String> lowerInput = new ArrayList<>();
+            for (String i : input) {
+                lowerInput.add(i.toLowerCase());
+            }
+
+            handleCommand(lowerInput);
         }
         catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -25,15 +33,15 @@ public class CommandHandler {
     }
     //TODO: Вместо void передавать Object
     private void handleCommand(List<String> input) {
-        if (input == null) throw new RuntimeException("Input cannot be Null.");
+        if (input == null || input.isEmpty()) throw new RuntimeException("Input cannot be empty.");
 
         String commandName = input.get(0);
         if (commandName != null && commandName.isBlank()) throw new RuntimeException("Command not found.");
 
-        List<String> nextInput = input.subList(1, input.size());
         Command command = commands.get(commandName);
 
         if (Objects.isNull(command)) throw new RuntimeException("Command not found.");
+        List<String> nextInput = input.subList(1, input.size());
         command.executeCommand(nextInput);
     }
 }

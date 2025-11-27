@@ -1,30 +1,27 @@
 package org.rottweiler488.service.commandHandler.commands;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public abstract class Command {
     protected Map<String, Command> commands = new HashMap<String, Command>();
 
     protected String name = "command";
-    protected int numberOfArguments = 0;
+    protected int numberOfArguments = 0; //Переделать под boolean?
     protected boolean argumentsImpossible = false;
 
-//    public Command(String name, int numberOfArguments) {
-//        this.name = name;
-//        this.numberOfArguments = numberOfArguments;
-//    }
+    protected void addCommand(Command command) {
+        String commandName = command.getName();
+        commands.put(commandName, command);
+    }
 
     protected abstract void onExecuteCommand(List<String> input);
-    //-min- -help- 1
-    public void executeCommand(List<String> input) {
+
+    public void executeCommand(List<String> input) {//, Optional<T> object) {
         int inputSize = input.size();
         //List<String> nextInput = input;//(inputSize > 0 && commands.isEmpty()) ? input.subList(1, inputSize) : input;
 
         //if (commands.isEmpty())
-        if (numberOfArguments > 0 && input.size() != numberOfArguments) throw new RuntimeException(String.format("Incorrect number of arguments: %s and size %s or wrong command.", numberOfArguments, inputSize));
+        if (numberOfArguments > 0 && input.size() < numberOfArguments) throw new RuntimeException("Incorrect number of arguments or wrong command.");
 
         onExecuteCommand(input);
     }

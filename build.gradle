@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'org.rottweiler488'
-version = '0.2.0-SNAPSHOT'
+version = '0.2.1-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -28,7 +28,7 @@ application {
 
 shadowJar {
     archiveBaseName.set('messenger-min')
-    archiveVersion.set('0.2.0')
+    archiveVersion.set('0.2.1')
 }
 
 test {

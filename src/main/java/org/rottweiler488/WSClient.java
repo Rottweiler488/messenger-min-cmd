@@ -22,12 +22,44 @@ public class WSClient {
 
     @OnClose
     public void onClose(Session session, CloseReason reason) {
-        System.out.printf("Disconnected by reason: %s", reason.getReasonPhrase());
+        System.out.printf("Disconnected by reason: %s\n", reason.getReasonPhrase());
     }
 
     public void send(String message) {
-        if (!Objects.isNull(session) && session.isOpen()) {
-            session.getAsyncRemote().sendText(message);
+        try {
+            if (isConnected()) {
+                session.getAsyncRemote().sendText(message);
+            }
+            else {
+                throw new Exception();
+            }
         }
+        catch (Exception e) {
+            System.out.println("No connection.");
+        }
+    }
+
+    public void disconnect() {
+        if (session.isOpen() && session != null) {
+            try {
+                session.close(new CloseReason(CloseReason.CloseCodes.GOING_AWAY, "exit or closing application."));
+                session = null; //Remove?
+            }
+            catch (Exception e) {
+                System.out.println("Client is already disconnected.");
+            }
+        }
+    }
+
+    public boolean isConnected() {
+        try {
+            if (session != null || session.isOpen())
+                return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
+
+        return false;
     }
 }

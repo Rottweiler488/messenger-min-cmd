@@ -6,7 +6,7 @@ import org.rottweiler488.WSClient;
 
 import java.net.URI;
 
-public class ChatJoin {
+public class ChatJoin { //Может быть использовать, а команду сделать лишь обёрткой.
     public WSClient join(String address) {
         WSClient client = null;
         WebSocketContainer container = ContainerProvider.getWebSocketContainer();
