@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.15)
+project(Messager-Min)
+
+set(CMAKE_CXX_STANDARD 20)
+
+# Все бинарные файлы будут в build/bin/
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+# Находим все .cpp файлы
+file(GLOB_RECURSE CPP_SOURCES "src/main/cpp/*.cpp")
+
+# Создаем исполняемый файл
+add_executable(messager-min ${CPP_SOURCES})
+
+# Добавляем include директории
+target_include_directories(messager-min PRIVATE src/main/cpp)
