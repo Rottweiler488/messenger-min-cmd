@@ -1,7 +1,7 @@
-package org.rottweiler488.min.service.commandHandler.commands.chat;
+package org.rottweiler488.min.service.legacyCommandHandler.commands.chat;
 
 import org.rottweiler488.min.service.ClientConnection;
-import org.rottweiler488.min.service.commandHandler.commands.Command;
+import org.rottweiler488.min.service.legacyCommandHandler.commands.Command;
 
 import java.util.List;
 
@@ -16,6 +16,6 @@ public class JoinCommand extends Command {
         if (input.isEmpty()) throw new RuntimeException("Join address argument is required.");
 
         String address = input.get(0);
-        ClientConnection.connect(address);
+        //ClientConnection.connect(address);
     }
 }

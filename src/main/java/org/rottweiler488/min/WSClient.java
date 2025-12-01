@@ -7,21 +7,13 @@ public class WSClient {
     private Session session;
 
     @OnOpen
-    public  void onOpen(Session session) {
-        this.session = session;
-
-        System.out.println("Connected to server.");
-    }
+    public  void onOpen(Session session) { this.session = session; }
 
     @OnMessage
-    public void onMessage(String message, Session session) {
-        System.out.println(message);
-    }
+    public void onMessage(String message, Session session) { System.out.println(message); }
 
     @OnClose
-    public void onClose(Session session, CloseReason reason) {
-        System.out.println("Disconnected");// by reason: %s\n", reason.getReasonPhrase());
-    }
+    public void onClose(Session session, CloseReason reason) {}
 
     public void send(String message) {
         try {
@@ -44,20 +36,13 @@ public class WSClient {
                 session = null; //Remove?
             }
             catch (Exception e) {
-                System.out.println("Client is already disconnected.");
+                //System.out.println("Client is already disconnected.");
             }
         }
     }
 
     public boolean isConnected() {
-        try {
-            if (session != null || session.isOpen())
-                return true;
-        }
-        catch (Exception e) {
-            return false;
-        }
-
-        return false;
+        try { return (session != null || session.isOpen()); }
+        catch (Exception e) { return false; }
     }
 }

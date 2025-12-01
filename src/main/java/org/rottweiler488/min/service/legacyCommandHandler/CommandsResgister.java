@@ -1,6 +1,6 @@
-package org.rottweiler488.min.service.commandHandler;
+package org.rottweiler488.min.service.legacyCommandHandler;
 
-import org.rottweiler488.min.service.commandHandler.commands.*;
+import org.rottweiler488.min.service.legacyCommandHandler.commands.*;
 
 import java.util.HashMap;
 import java.util.Map;

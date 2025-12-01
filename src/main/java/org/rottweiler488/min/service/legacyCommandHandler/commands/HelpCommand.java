@@ -1,4 +1,4 @@
-package org.rottweiler488.min.service.commandHandler.commands;
+package org.rottweiler488.min.service.legacyCommandHandler.commands;
 
 import java.util.List;
 
@@ -12,7 +12,6 @@ public class HelpCommand extends Command {
     public HelpCommand() {
         name = "help";
         //numberOfArguments = 1;
-        argumentsImpossible = true;
 
         //CommandsResgister.addCommand(name, this);
     }

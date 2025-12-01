@@ -6,33 +6,47 @@ import jakarta.websocket.WebSocketContainer;
 import org.rottweiler488.min.WSClient;
 
 import java.net.URI;
+import java.util.concurrent.CompletableFuture;
 
-public class ClientConnection { //Renaming?
+public class ClientConnection implements NetworkClient { //Renaming?
     public static final String SERVER_ADDRESS = "localhost:4052";
 
-    public static WSClient client = new WSClient();
-    public static WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+    public WSClient client = new WSClient();
+    public WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 
-    public static void connect(String address) {//(String chatName) {
+    @Override
+    public CompletableFuture<Boolean> connect(String host, int port) {
         if (client.isConnected()) {
-            System.out.println("Client is already connected.");
-            return;
+            return CompletableFuture.completedFuture(false);
         }
 
         try {
+            String address = host + ":" + port;
             container.connectToServer(client, new URI(String.format("ws://%s/ws/chat", address)));//String.format("ws://%s/ws/chat//s/%s", SERVER_ADDRESS, chatName)));
+            return CompletableFuture.completedFuture(true);
         }
         catch (Exception e) {
-            System.out.println("Failed to connect to the server at the specified address.");
+            return CompletableFuture.failedFuture(e);
         }
     }
 
-    public static void disconnect() {
+    @Override
+    public CompletableFuture<Void> sendMessage(String text) {
         if (!client.isConnected()) {
-            System.out.println("Client is not connected.");
-            return;
+            return CompletableFuture.failedFuture(new Exception());
+        }
+
+        client.send(text);
+        return CompletableFuture.completedFuture(null);
+    }
+
+    @Override
+    public CompletableFuture<Void> disconnect() {
+        if (!client.isConnected()) {
+            return CompletableFuture.failedFuture(new Exception());
         }
 
         client.disconnect();
+        return CompletableFuture.completedFuture(null);
     }
 }

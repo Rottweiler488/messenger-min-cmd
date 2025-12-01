@@ -1,7 +1,7 @@
-package org.rottweiler488.min.service.commandHandler.commands.chat;
+package org.rottweiler488.min.service.legacyCommandHandler.commands.chat;
 
 import org.rottweiler488.min.service.ClientConnection;
-import org.rottweiler488.min.service.commandHandler.commands.Command;
+import org.rottweiler488.min.service.legacyCommandHandler.commands.Command;
 
 import java.util.List;
 
@@ -12,6 +12,6 @@ public class ExitCommand extends Command {
 
     @Override
     protected void onExecuteCommand(List<String> input) {
-        ClientConnection.disconnect();
+        //ClientConnection.disconnect();
     }
 }

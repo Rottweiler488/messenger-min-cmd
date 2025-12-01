@@ -1,13 +1,12 @@
-package org.rottweiler488.min.service.commandHandler.commands;
+package org.rottweiler488.min.service.legacyCommandHandler.commands;
 
 import java.util.*;
 
 public abstract class Command {
-    protected Map<String, Command> commands = new HashMap<String, Command>();
+    protected Map<String, Command> commands = new HashMap<>();
 
     protected String name = "command";
     protected int numberOfArguments = 0; //Переделать под boolean?
-    protected boolean argumentsImpossible = false;
 
     protected void addCommand(Command command) {
         String commandName = command.getName();
