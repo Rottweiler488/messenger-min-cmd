@@ -1,7 +1,6 @@
 package org.rottweiler488.min;
 
 import jakarta.websocket.*;
-import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
 import org.rottweiler488.min.model.MessageData;
 
@@ -49,9 +48,9 @@ public class WSServerEndpoint {
             int toMessageDataIndex = messageData.size();// - 1;
             int fromMessageDataIndex = Math.max(toMessageDataIndex - historyMaxLength, 0);
             for (MessageData data : messageData.subList(fromMessageDataIndex, toMessageDataIndex)) {
-                dataTime = data.getTime();
-                dataUsername = data.getUsername();
-                dataText = data.getText();
+                dataTime = data.time();
+                dataUsername = data.username();
+                dataText = data.text();
 
                 finalText = "\n" + (dataUsername.isEmpty() ? dataText : String.format("(%s) %s: %s",dataTime, dataUsername, dataText));
 
