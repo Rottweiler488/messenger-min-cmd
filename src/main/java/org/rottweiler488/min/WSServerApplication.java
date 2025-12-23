@@ -30,11 +30,11 @@ public class WSServerApplication {
             }
         }
 
-        Server server = new Server(ip, port, "/ws", null, WSServerEndpoint.class);
+        Server server = new Server(ip, port, "/wss", null, WSServerEndpoint.class);
 
         try {
             server.start();
-            System.out.printf("Server started on ws://%s:%d/ws/chat\n", ip, port);
+            System.out.printf("Server started on wss://%s:%d/ws/chat\n", ip, port);
             new Scanner(System.in).nextLine();
         }
         catch (Exception e) {

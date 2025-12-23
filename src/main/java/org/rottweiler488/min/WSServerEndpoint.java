@@ -26,7 +26,7 @@ public class WSServerEndpoint {
     private final String formattedTime = time.format(formatter);
 
     static {
-        List<MessageData> loadedHistory = clientHistory.loadHistoryFromJsonFile();
+        List<MessageData> loadedHistory = clientHistory.loadListOfHistoryFromJsonFile();
         if (!loadedHistory.isEmpty()) {
             messagesData.addAll(loadedHistory);
             System.out.printf("Loaded %d messages\n", loadedHistory.size());
@@ -39,32 +39,12 @@ public class WSServerEndpoint {
         sessions.add(session);
         System.out.println("Client connection: " + session.getId());
 
-        List<MessageData> messageData = clientHistory.loadHistoryFromJsonFile(); //Возможно так не делать, ведь данные могут обновиться.
-        if (!Objects.isNull(messageData)) {
-            StringBuilder historyStringBuilder = new StringBuilder();
-
-            String dataTime, dataUsername, dataText, finalText = "";
-
-            int toMessageDataIndex = messageData.size();// - 1;
-            int fromMessageDataIndex = Math.max(toMessageDataIndex - historyMaxLength, 0);
-            for (MessageData data : messageData.subList(fromMessageDataIndex, toMessageDataIndex)) {
-                dataTime = data.time();
-                dataUsername = data.username();
-                dataText = data.text();
-
-                finalText = "\n" + (dataUsername.isEmpty() ? dataText : String.format("(%s) %s: %s",dataTime, dataUsername, dataText));
-
-                historyStringBuilder.append(finalText);
-            }
-
-            String fatHistory = historyStringBuilder.toString();
-
-            try {
-                session.getBasicRemote().sendText(fatHistory); //============================================================
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            String history = clientHistory.loadStringOfHistoryFromJsonFile();
+            session.getBasicRemote().sendText(history);
+        }
+        catch (IOException e) {
+            System.out.println("The story could not be loaded.");
         }
     }
 

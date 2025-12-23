@@ -1,12 +1,16 @@
 package org.rottweiler488.min;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.json.JsonReadContext;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.jsonschema.JsonSchema;
 import org.rottweiler488.min.model.MessageData;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
@@ -55,7 +59,7 @@ public class JsonClientHistory {
         }
     }
 
-    public List<MessageData> loadHistoryFromJsonFile() {
+    public List<MessageData> loadListOfHistoryFromJsonFile() {
         ObjectMapper mapper = new ObjectMapper();
         //String absoluteFilePath = basePath + directoryPath + fileName;
         File absoluteFile = file.toFile();//new File(absoluteFilePath);
@@ -70,6 +74,19 @@ public class JsonClientHistory {
         catch (IOException e) {
             return Collections.emptyList();
         }
+    }
+
+    public String loadStringOfHistoryFromJsonFile() throws IOException {
+        if (!Files.exists(file) || Files.size(file) == 0)
+            return "";
+
+        StringBuilder builder = new StringBuilder();
+        List<String> lines = Files.readAllLines(file);
+        for (String line : lines){
+            builder.append(line);
+        }
+
+        return builder.toString();
     }
 
     public Path getJsonFilePath() {

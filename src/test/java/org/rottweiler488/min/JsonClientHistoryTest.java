@@ -19,6 +19,6 @@ public class JsonClientHistoryTest {
         MessageData mesTwo = new MessageData("Chriks", "", "No.");
 
         clientHistory.saveHistoryToJsonFile(List.of(mesOne, mesTwo));
-        Assertions.assertEquals(List.of(mesOne, mesTwo), clientHistory.loadHistoryFromJsonFile());
+        Assertions.assertEquals(List.of(mesOne, mesTwo), clientHistory.loadListOfHistoryFromJsonFile());
     }
 }
