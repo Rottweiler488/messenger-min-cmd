@@ -1,0 +1,7 @@
+build/
+!build/libs/
+.gradle/
+.idea/
+out/
+Dockerfile
+.git

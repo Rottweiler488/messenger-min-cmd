@@ -28,7 +28,11 @@ application {
 
 shadowJar {
     archiveBaseName.set('messenger-min')
-    archiveVersion.set('0.2.4')
+    archiveClassifier = ''
+
+    manifest {
+        attributes 'Main-Class': 'org.rottweiler48.WSServerApplication'
+    }
 }
 
 test {
