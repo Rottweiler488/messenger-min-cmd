@@ -60,7 +60,9 @@ jobs:
         uses: gradle/actions/setup-gradle@v5
 
       - name: Run tests
-        run: ./gradlew check --build-cache
+        run: |
+          chmod +x gradlew
+          ./gradlew check --build-cache
 
       - name: Upload test report
         uses: actions/upload-artifact@v4
@@ -89,7 +91,9 @@ jobs:
           cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/develop' }}
 
       - name: Build
-        run: ./gradlew assemble --build-cache
+        run: |
+          chmod +x gradlew
+          ./gradlew assemble --build-cache
 
       - name: Upload build
         uses: actions/upload-artifact@v4
