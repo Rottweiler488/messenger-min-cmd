@@ -6,12 +6,13 @@ on:
       - "v*.*.*"
     branches:
       - main
+      - feature/ci-cd
     paths-ignore:
       - 'LICENSE'
       - '**.md'
       - '.github/**'
-      - '!.github/workdlows/CD-app.yml'
-    workflow_dispatсh:
+      - '!.github/workflows/CD-app.yml'
+    workflow_dispatch:
       inputs:
         reason:
           description: "Name the reason"
