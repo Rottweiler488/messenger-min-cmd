@@ -94,9 +94,3 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew assemble --build-cache
-
-      - name: Upload build
-        uses: actions/upload-artifact@v4
-        with:
-          name: messenger-min-artifact
-          path: build/libs/messenger-min.jar
