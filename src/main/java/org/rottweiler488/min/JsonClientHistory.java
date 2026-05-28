@@ -35,7 +35,7 @@ public class JsonClientHistory {
 
     public void saveHistoryToJsonFile(List<MessageData> messages) {
         if (Objects.isNull(messages) || messages.isEmpty())
-            return;
+            return; //Return ERROR
 
         ObjectMapper mapper = new ObjectMapper();
 

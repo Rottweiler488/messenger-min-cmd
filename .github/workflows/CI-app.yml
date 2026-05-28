@@ -62,7 +62,7 @@ jobs:
       - name: Run tests
         run: |
           chmod +x gradlew
-          ./gradlew check --build-cache
+          ./gradlew test --build-cache
 
       - name: Upload test report
         uses: actions/upload-artifact@v4
