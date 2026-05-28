@@ -45,7 +45,7 @@ jobs:
       - name: Build
         run: |
           chmod +x gradlew
-          ./gradlew assemble --build-cache
+          ./gradlew shadowJar --build-cache
 
       - name: Login in Docker Hub
         uses: docker/login-action@v3

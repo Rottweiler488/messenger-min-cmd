@@ -93,4 +93,4 @@ jobs:
       - name: Build
         run: |
           chmod +x gradlew
-          ./gradlew assemble --build-cache
+          ./gradlew shadowJar --build-cache
