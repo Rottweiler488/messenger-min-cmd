@@ -17,30 +17,35 @@ import java.util.List;
 import java.util.Objects;
 
 public class JsonClientHistory {
-    //private String serverIp = "0.0.0.0";
-    private Path baseDir = Path.of(System.getProperty("user.dir"), "chats");
-    private Path file = baseDir.resolve("history.json");
+    private final Path baseDir;// = Path.of(System.getProperty("user.dir"), "chats");
+    private final Path file;// = baseDir.resolve("history.json");
 //    private final String basePath = System.getProperty("user.dir");
 //    private final String directoryPath = "/chats";
 //    private String fileName = "/history.json";
 
-    private int maxLength = 50;
+    private final ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
-    public JsonClientHistory(int maxLength) { this.maxLength = maxLength; }
+    private final int maxLength;
+
+    public JsonClientHistory(int maxLength) {
+        //Просто передаёт параметры
+        this(
+                Path.of(System.getProperty("user.dir"), "chats"),
+                maxLength
+        );
+    }
+
     public JsonClientHistory(Path directory, int maxLength) {
-        baseDir = directory;
-        //this.fileName = fileName.endsWith(".json") ? fileName : fileName + ".json";
+        baseDir = Objects.requireNonNull(directory);
+        file = directory.resolve("history.json");
         this.maxLength = maxLength;
+
+        //this.fileName = fileName.endsWith(".json") ? fileName : fileName + ".json";
     }
 
     public void saveHistoryToJsonFile(List<MessageData> messages) {
         if (Objects.isNull(messages) || messages.isEmpty())
             return; //Return ERROR
-
-        ObjectMapper mapper = new ObjectMapper();
-
-        //TODO: Убрать?
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
         //String directoryFilePath = basePath + directoryPath;
         File directoryFile = baseDir.toFile();//new File(directoryFilePath);
@@ -60,7 +65,6 @@ public class JsonClientHistory {
     }
 
     public List<MessageData> loadListOfHistoryFromJsonFile() {
-        ObjectMapper mapper = new ObjectMapper();
         //String absoluteFilePath = basePath + directoryPath + fileName;
         File absoluteFile = file.toFile();//new File(absoluteFilePath);
 

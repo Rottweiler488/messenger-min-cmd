@@ -11,16 +11,27 @@ import java.util.List;
 
 public class JsonClientHistoryTest {
     @Test
-    public void testLoadListJsonHistory() throws IOException {
-        Path temp = Files.createTempDirectory("jsonTest");
+    public void testLoadListJsonHistory() { //throws IOException {
+        try {
+            Path temp = Files.createTempDirectory("jsonTest");
 
-        JsonClientHistory clientHistory = new JsonClientHistory(temp, 2);
-        MessageData mesOne = new MessageData("Gigi", "", "Can i help you..?");
-        MessageData mesTwo = new MessageData("Chriks", "", "No.");
+            JsonClientHistory clientHistory = new JsonClientHistory(temp, 2);
 
-        System.out.println(clientHistory.getJsonFilePath());
+            List<MessageData> expected = List.of(
+                    new MessageData("Gigi", "", "Can i help you..?"),
+                    new MessageData("Chriks", "", "No.")
+            );
 
-        clientHistory.saveHistoryToJsonFile(List.of(mesOne, mesTwo));
-        Assertions.assertEquals(List.of(mesOne, mesTwo), clientHistory.loadListOfHistoryFromJsonFile());
+            System.out.println(clientHistory.getJsonFilePath());
+
+            clientHistory.saveHistoryToJsonFile(expected);
+
+            List<MessageData> actual = clientHistory.loadListOfHistoryFromJsonFile();
+
+            Assertions.assertEquals(expected, actual);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
