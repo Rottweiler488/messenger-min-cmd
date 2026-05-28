@@ -19,7 +19,7 @@ import java.util.Objects;
 public class JsonClientHistory {
     //private String serverIp = "0.0.0.0";
     private Path baseDir = Path.of(System.getProperty("user.dir"), "chats");
-    private final Path file = baseDir.resolve("history.json");
+    private Path file = baseDir.resolve("history.json");
 //    private final String basePath = System.getProperty("user.dir");
 //    private final String directoryPath = "/chats";
 //    private String fileName = "/history.json";

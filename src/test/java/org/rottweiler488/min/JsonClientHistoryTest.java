@@ -18,6 +18,8 @@ public class JsonClientHistoryTest {
         MessageData mesOne = new MessageData("Gigi", "", "Can i help you..?");
         MessageData mesTwo = new MessageData("Chriks", "", "No.");
 
+        System.out.println(clientHistory.getJsonFilePath());
+
         clientHistory.saveHistoryToJsonFile(List.of(mesOne, mesTwo));
         Assertions.assertEquals(List.of(mesOne, mesTwo), clientHistory.loadListOfHistoryFromJsonFile());
     }
