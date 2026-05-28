@@ -20,9 +20,9 @@ public class SendCommandHandler extends BaseCommandHandler {
 
         String text = input.args().get(0);
         context.networkClient().sendMessage(text).exceptionally((e) -> {
-                    System.out.println("There is no connection to the server.");
-                    return null;
-                });
+            System.out.println("There is no connection to the server.");
+            return null;
+        });
 
         return CompletableFuture.completedFuture(null);
     }

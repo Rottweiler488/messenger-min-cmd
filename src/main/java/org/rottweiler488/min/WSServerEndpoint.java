@@ -1,13 +1,18 @@
 package org.rottweiler488.min;
 
-import jakarta.websocket.*;
+import jakarta.websocket.Session;
+import jakarta.websocket.OnOpen;
+import jakarta.websocket.OnClose;
+import jakarta.websocket.OnMessage;
 import jakarta.websocket.server.ServerEndpoint;
 import org.rottweiler488.min.model.MessageData;
 
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Set;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -66,7 +71,8 @@ public class WSServerEndpoint {
             username = String.format("Guest-%s", session.getId());
         }
 
-        String text = String.format("(%s) %s: %s", formattedTime, username, message);//"(" + formattedTime + ") " + senderSession.getId() + ": " + message;
+        //"(" + formattedTime + ") " + senderSession.getId() + ": " + message;
+        String text = String.format("(%s) %s: %s", formattedTime, username, message);
         messagesData.add(new MessageData(username, formattedTime, message));
         clientHistory.saveHistoryToJsonFile(messagesData);//, direction);
         sendSessions(text, session);

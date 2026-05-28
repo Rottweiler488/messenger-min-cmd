@@ -1,6 +1,9 @@
 package org.rottweiler488.min.service.commandHandler.commands.chat;
 
-import org.rottweiler488.min.service.commandHandler.*;
+import org.rottweiler488.min.service.commandHandler.CommandAction;
+import org.rottweiler488.min.service.commandHandler.CommandContext;
+import org.rottweiler488.min.service.commandHandler.Command;
+import org.rottweiler488.min.service.commandHandler.CommandResponder;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;

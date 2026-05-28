@@ -17,9 +17,9 @@ public class ExitCommandAction implements CommandAction, Command {
     public CompletableFuture<Void> execute(List<String> args, CommandContext context) {
         context.networkClient().disconnect().thenRun(() ->
                 System.out.println("Disconnected.")).exceptionally(throwable -> {
-            System.out.println("Client is already disconnected.");
-            return null;
-        });
+                    System.out.println("Client is already disconnected.");
+                    return null;
+                });
 
         return CompletableFuture.completedFuture(null);
     }

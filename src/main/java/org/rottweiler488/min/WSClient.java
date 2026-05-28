@@ -1,6 +1,11 @@
 package org.rottweiler488.min;
 
-import jakarta.websocket.*;
+import jakarta.websocket.ClientEndpoint;
+import jakarta.websocket.Session;
+import jakarta.websocket.OnOpen;
+import jakarta.websocket.OnMessage;
+import jakarta.websocket.OnClose;
+import jakarta.websocket.CloseReason;
 
 @ClientEndpoint
 public class WSClient {

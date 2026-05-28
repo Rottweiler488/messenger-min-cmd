@@ -22,7 +22,8 @@ public class ClientConnection implements NetworkClient { //Renaming?
 
         try {
             String address = host + ":" + port;
-            container.connectToServer(client, new URI(String.format("ws://%s/ws/chat", address)));//String.format("ws://%s/ws/chat//s/%s", SERVER_ADDRESS, chatName)));
+            //String.format("ws://%s/ws/chat//s/%s", SERVER_ADDRESS, chatName)));
+            container.connectToServer(client, new URI(String.format("ws://%s/ws/chat", address)));
             return CompletableFuture.completedFuture(true);
         }
         catch (Exception e) {

@@ -1,6 +1,8 @@
 package org.rottweiler488.min.service.commandHandler.commands;
 
-import org.rottweiler488.min.service.commandHandler.*;
+import org.rottweiler488.min.service.commandHandler.BaseCommandHandler;
+import org.rottweiler488.min.service.commandHandler.CommandInput;
+import org.rottweiler488.min.service.commandHandler.CommandContext;
 
 import java.util.concurrent.CompletableFuture;
 
