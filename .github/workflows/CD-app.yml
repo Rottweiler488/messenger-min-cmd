@@ -12,16 +12,16 @@ on:
       - '**.md'
       - '.github/**'
       - '!.github/workflows/CD-app.yml'
-    workflow_dispatch:
-      inputs:
-        reason:
-          description: "Name the reason"
-          default: "Update"
-          required: true
-        version:
-          description: 'Version'
-          required: true
-          default: 'latest'
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Name the reason"
+        default: "Update"
+        required: true
+      version:
+        description: 'Version'
+        required: true
+        default: 'latest'
 
 jobs:
   deploy:

@@ -1,4 +1,4 @@
-FROM eclipse-temuri:21-jre-jammy AS lightapp
+FROM eclipse-temurin:21-jre-jammy AS lightapp
 WORKDIR /app
 
 RUN groupadd -g 1000 head && \
