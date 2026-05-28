@@ -39,7 +39,7 @@ jobs:
 
       - name: Run Checkstyle
         run: |
-          cmod +x gradlew
+          chmod +x gradlew
           ./gradlew checkstyleMain checkstyleTest
 
   test:
