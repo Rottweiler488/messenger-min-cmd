@@ -35,10 +35,10 @@ public class WSServerApplication {
         try {
             server.start();
             System.out.printf("Server started on ws://%s:%d/ws/chat\n", ip, port);
-            new Scanner(System.in).nextLine();
+            Thread.currentThread().join();
         }
         catch (Exception e) {
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
         }
         finally {
             server.stop();
