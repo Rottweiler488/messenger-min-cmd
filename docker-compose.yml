@@ -5,9 +5,6 @@ services:
     image: ${DOCKER_USERNAME}/messenger-min-app:${IMAGE_TAG}
     container_name: messenger-min-app
     hostname: messenger-min-app
-    build:
-      context: .
-      dockerfile: ./Dockerfile
     ports:
       - "4052:4052"
     restart: unless-stopped
