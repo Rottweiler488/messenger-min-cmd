@@ -6,6 +6,7 @@ on:
       - "v*.*.*"
     branches:
       - main
+      - feature/ci-cd
     paths-ignore:
       - 'LICENSE'
       - '**.md'
