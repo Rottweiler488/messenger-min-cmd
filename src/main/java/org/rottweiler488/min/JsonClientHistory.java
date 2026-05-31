@@ -18,10 +18,7 @@ import java.util.Objects;
 
 public class JsonClientHistory {
     private final Path baseDir;// = Path.of(System.getProperty("user.dir"), "chats");
-    private final Path file;// = baseDir.resolve("history.json");
-//    private final String basePath = System.getProperty("user.dir");
-//    private final String directoryPath = "/chats";
-//    private String fileName = "/history.json";
+    private final Path file;
 
     private final ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
@@ -39,25 +36,20 @@ public class JsonClientHistory {
         baseDir = Objects.requireNonNull(directory);
         file = directory.resolve("history.json");
         this.maxLength = maxLength;
-
-        //this.fileName = fileName.endsWith(".json") ? fileName : fileName + ".json";
     }
 
     public void saveHistoryToJsonFile(List<MessageData> messages) {
         if (Objects.isNull(messages) || messages.isEmpty())
-            return; //Return ERROR
+            return;
 
-        //String directoryFilePath = basePath + directoryPath;
-        File directoryFile = baseDir.toFile();//new File(directoryFilePath);
+        File directoryFile = baseDir.toFile();
 
         if (!directoryFile.exists() && !directoryFile.mkdirs()) {
             System.out.println("Cannot create folder. " + directoryFile.getAbsolutePath());
         }
 
         try {
-            //String absoluteFilePath = directoryFilePath + fileName;
-            //File absoluteFile = new File(absoluteFilePath);
-            mapper.writeValue(file.toFile(), messages);//(file, messages);
+            mapper.writeValue(file.toFile(), messages);
         }
         catch (IOException e) {
             System.out.println("The message history could not be saved.");
@@ -65,8 +57,7 @@ public class JsonClientHistory {
     }
 
     public List<MessageData> loadListOfHistoryFromJsonFile() {
-        //String absoluteFilePath = basePath + directoryPath + fileName;
-        File absoluteFile = file.toFile();//new File(absoluteFilePath);
+        File absoluteFile = file.toFile();
 
         if (!absoluteFile.exists() || absoluteFile.length() == 0)
             return Collections.emptyList();
@@ -86,6 +77,7 @@ public class JsonClientHistory {
 
         StringBuilder builder = new StringBuilder();
         List<String> lines = Files.readAllLines(file);
+
         for (String line : lines){
             builder.append(line);
         }
@@ -93,7 +85,5 @@ public class JsonClientHistory {
         return builder.toString();
     }
 
-    public Path getJsonFilePath() {
-        return file;//basePath + directoryPath + fileName;
-    }
+    public Path getJsonFilePath() { return file; }
 }

@@ -44,12 +44,34 @@ public class WSServerEndpoint {
         sessions.add(session);
         System.out.println("Client connection: " + session.getId());
 
-        try {
-            String history = clientHistory.loadStringOfHistoryFromJsonFile();
-            session.getBasicRemote().sendText(history);
-        }
-        catch (IOException e) {
-            System.out.println("The story could not be loaded.");
+        List<MessageData> messageData = clientHistory.loadListOfHistoryFromJsonFile();
+
+        if (!Objects.isNull(messageData)) {
+            StringBuilder historyStringBuilder = new StringBuilder();
+
+            String dataTime, dataUsername, dataText, finalText = "";
+            int toMessageDataIndex = messageData.size();
+            int fromMessageDataIndex = Math.max(toMessageDataIndex - historyMaxLength, 0);
+
+            for (MessageData data : messageData.subList(fromMessageDataIndex, toMessageDataIndex)) {
+                dataTime = data.time();
+                dataUsername = data.username();
+                dataText = data.text();
+
+                finalText = "\n" + (dataUsername.isEmpty() ? dataText : String.format("(%s) %s: %s", dataTime, dataUsername, dataText));
+
+                historyStringBuilder.append(finalText);
+            }
+
+            String fatHistory = historyStringBuilder.toString();
+
+            try {
+                //String history = clientHistory.loadStringOfHistoryFromJsonFile();
+                session.getBasicRemote().sendText(fatHistory);
+            }
+            catch (IOException e) {
+                System.out.println("The story could not be loaded.");
+            }
         }
     }
 
