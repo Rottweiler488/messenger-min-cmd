@@ -1,6 +1,16 @@
 name: CD application
 
 on:
+  push:
+    tags:
+      - "v*.*.*"
+    branches:
+      - main
+    paths-ignore:
+      - 'LICENSE'
+      - '**.md'
+      - '.github/**'
+      - '!.github/workflows/CD-app.yml'
   workflow_dispatch:
     inputs:
       reason:
