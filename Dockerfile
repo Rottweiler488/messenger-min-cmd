@@ -2,7 +2,8 @@ FROM eclipse-temurin:21-jre-jammy AS lightapp
 WORKDIR /app
 
 RUN groupadd -g 1000 head && \
-    useradd -u 1000 -g head -ms /bin/bash head
+    useradd -u 1000 -g head -ms /bin/bash head && \
+    chown -R head:head /app
 
 COPY --chown=head:head build/libs/messenger-min.jar app.jar
 
