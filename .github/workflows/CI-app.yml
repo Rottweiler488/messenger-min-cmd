@@ -95,3 +95,10 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew shadowJar --build-cache
+
+      - name: Upload Jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: application
+          path: build/libs/messenger-min.jar
+          retention-days: 2
