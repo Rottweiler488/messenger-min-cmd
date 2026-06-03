@@ -17,6 +17,10 @@ on:
         description: 'Version'
         required: true
         default: 'latest'
+      run_id:
+        description: 'CI workflow Run ID'
+        required: false
+        default: ''
 
 jobs:
   deploy:
@@ -36,6 +40,8 @@ jobs:
         with:
           name: application
           path: build/libs/
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.TOKEN_GITHUB }}
 
       - name: Login in Docker Hub
         uses: docker/login-action@v3
