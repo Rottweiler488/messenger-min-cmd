@@ -2,8 +2,6 @@ name: CD application
 
 on:
   push:
-    tags:
-      - "v*.*.*"
     branches:
       - main
       - feature/ci-cd
