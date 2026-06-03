@@ -11,6 +11,7 @@ on:
       - '**.md'
       - '.github/**'
       - '!.github/workflows/CI-app.yml'
+      - '!.github/workflows/CD-app.yml'
   pull_request:
     branches:
       - main
