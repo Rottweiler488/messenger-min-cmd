@@ -40,7 +40,7 @@ jobs:
         with:
           name: application
           path: build/libs/
-          run-id: ${{ github.event.workflow_run.id }}
+          run-id: ${{ inputs.run_id || github.event.workflow_run.id }}
           github-token: ${{ secrets.TOKEN_GITHUB }}
 
       - name: Login in Docker Hub
